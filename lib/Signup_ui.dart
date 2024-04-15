@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
+class SignupPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String _errorMessage = '';
 
-  void _login() async {
+  void _signup() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+      // Add Firebase signup logic here
+      // Navigate to CalculatorScreen on successful sign up
       Navigator.pushReplacementNamed(context, '/calculator');
     } catch (e) {
       setState(() {
-        _errorMessage = 'Login failed. Please check your email and password.';
+        _errorMessage = 'Sign up failed. Please try again.';
       });
     }
   }
@@ -29,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -55,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: _login,
-              child: const Text('Login'),
+              onPressed: _signup,
+              child: const Text('Sign Up'),
             ),
             const SizedBox(height: 10.0),
             Text(
@@ -66,9 +63,9 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.pushReplacementNamed(context, '/');
               },
-              child: const Text('Sign Up'),
+              child: const Text('Already have an account? Log in'),
             ),
           ],
         ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Login_ui.dart';
+import 'Signup_ui.dart';
+import 'calculator_screen.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -10,7 +12,7 @@ Future main() async {
 }
 
 class CalculatorApp extends StatelessWidget {
-  const CalculatorApp({Key? key});
+  const CalculatorApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,12 @@ class CalculatorApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/signup': (context) => SignupPage(),
+        '/calculator': (context) => const CalculatorScreen(),
+      },
     );
   }
 }
